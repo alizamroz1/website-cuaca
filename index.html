@@ -20,6 +20,12 @@
           <h1 id="page-title">Prakiraan Suhu Per Jam Jakarta</h1>
           <p class="subtitle">
             Data temperatur 2 meter dari koordinat Jakarta (-6.2, 106.8),
+            dilengkapi filter 12 atau 24 jam ke depan, keterangan kondisi, dan
+            gambar visual sesuai suhu.
+          </p>
+        </div>
+        <div class="weather-badge" id="hero-weather-badge" aria-label="Ikon cuaca">
+          <span id="hero-weather-icon">☀️</span>
             ditampilkan dalam tabel yang rapi dan mudah dibaca.
           </p>
         </div>
@@ -41,12 +47,37 @@
           <span class="summary-label">Data Ditampilkan</span>
           <strong id="row-count">Memuat...</strong>
         </article>
+        <article class="summary-card condition-summary" id="condition-summary">
+          <span class="summary-label">Kondisi Dominan</span>
+          <strong id="dominant-condition">Memuat...</strong>
+        </article>
       </section>
 
       <section class="forecast-card" aria-labelledby="table-title">
         <div class="table-header">
           <div>
             <p class="eyebrow">Hourly forecast</p>
+            <h2 id="table-title">Daftar Waktu, Suhu & Kondisi</h2>
+          </div>
+          <div class="table-actions">
+            <label class="filter-control" for="hour-filter">
+              Tampilkan
+              <select id="hour-filter" name="hour-filter">
+                <option value="12">12 jam ke depan</option>
+                <option value="24">24 jam ke depan</option>
+              </select>
+            </label>
+            <button class="refresh-button" id="refresh-button" type="button">
+              Muat ulang
+            </button>
+          </div>
+        </div>
+
+        <div class="legend" aria-label="Legenda kondisi suhu">
+          <span><strong>🌧️ Sejuk</strong> ≤ 24°C</span>
+          <span><strong>⛅ Nyaman</strong> 24–29°C</span>
+          <span><strong>☀️ Panas</strong> 29–33°C</span>
+          <span><strong>🔥 Sangat panas</strong> &gt; 33°C</span>
             <h2 id="table-title">Daftar Waktu & Suhu</h2>
           </div>
           <button class="refresh-button" id="refresh-button" type="button">
@@ -62,6 +93,10 @@
           <table>
             <thead>
               <tr>
+                <th scope="col">Gambar</th>
+                <th scope="col">time (waktu pengukuran)</th>
+                <th scope="col">temperature_2m (°C)</th>
+                <th scope="col">Keterangan</th>
                 <th scope="col">time (waktu pengukuran)</th>
                 <th scope="col">temperature_2m (°C)</th>
               </tr>

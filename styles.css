@@ -92,6 +92,7 @@ h2 {
 }
 
 .subtitle {
+  max-width: 690px;
   max-width: 660px;
   margin: 22px 0 0;
   color: var(--muted);
@@ -108,6 +109,23 @@ h2 {
   border-radius: 36px;
   background: linear-gradient(145deg, #fef3c7, #bfdbfe);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 18px 38px rgba(30, 64, 175, 0.2);
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.weather-badge.cool {
+  background: linear-gradient(145deg, #dbeafe, #bae6fd);
+}
+
+.weather-badge.comfortable {
+  background: linear-gradient(145deg, #dcfce7, #bfdbfe);
+}
+
+.weather-badge.hot {
+  background: linear-gradient(145deg, #fef3c7, #fed7aa);
+}
+
+.weather-badge.very-hot {
+  background: linear-gradient(145deg, #fee2e2, #fdba74);
 }
 
 .weather-badge span {
@@ -117,6 +135,7 @@ h2 {
 
 .summary-grid {
   display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   margin: 24px 0;
@@ -136,6 +155,11 @@ h2 {
 }
 
 .summary-card strong {
+  font-size: 1.28rem;
+}
+
+.condition-summary {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(219, 234, 254, 0.82));
   font-size: 1.35rem;
 }
 
@@ -152,6 +176,39 @@ h2 {
   padding: 28px;
   border-bottom: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.65);
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.filter-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #334155;
+  font-weight: 800;
+}
+
+.filter-control select {
+  min-width: 170px;
+  border: 1px solid #bfdbfe;
+  border-radius: 999px;
+  padding: 11px 40px 11px 14px;
+  color: var(--primary-dark);
+  font: inherit;
+  font-weight: 800;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.filter-control select:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
 
 .refresh-button {
@@ -176,6 +233,22 @@ h2 {
   cursor: wait;
   opacity: 0.65;
   transform: none;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 18px 28px 0;
+}
+
+.legend span {
+  border: 1px solid #dbeafe;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #475569;
+  background: #ffffff;
+  font-size: 0.9rem;
 }
 
 .status-message {
@@ -210,6 +283,7 @@ h2 {
 table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 760px;
   min-width: 580px;
 }
 
@@ -218,6 +292,7 @@ td {
   padding: 16px 18px;
   text-align: left;
   border-bottom: 1px solid #e8eefc;
+  vertical-align: middle;
 }
 
 th {
@@ -239,10 +314,56 @@ tbody tr:hover {
   background: #eff6ff;
 }
 
+td:nth-child(3) {
 td:last-child {
   color: var(--primary-dark);
   font-size: 1.05rem;
   font-weight: 800;
+}
+
+td:last-child strong,
+td:last-child span {
+  display: block;
+}
+
+td:last-child span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.condition-icon {
+  display: inline-grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 16px;
+  font-size: 1.7rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 10px 18px rgba(15, 23, 42, 0.08);
+}
+
+.condition-icon.cool,
+.condition-icon.unknown {
+  background: #dbeafe;
+}
+
+.condition-icon.comfortable {
+  background: #dcfce7;
+}
+
+.condition-icon.hot {
+  background: #fef3c7;
+}
+
+.condition-icon.very-hot {
+  background: #fee2e2;
+}
+
+@media (max-width: 900px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 760px) {
@@ -252,18 +373,34 @@ td:last-child {
   }
 
   .hero-card,
+  .table-header,
+  .table-actions,
+  .filter-control {
   .table-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .table-actions,
+  .filter-control,
+  .filter-control select,
+  .refresh-button {
+    width: 100%;
   }
 
   .summary-grid {
     grid-template-columns: 1fr;
   }
 
+  .legend,
   .table-wrapper,
   .status-message {
     margin-right: 16px;
     margin-left: 16px;
+  }
+
+  .legend {
+    padding-right: 0;
+    padding-left: 0;
   }
 }
