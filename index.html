@@ -26,6 +26,11 @@
         </div>
         <div class="weather-badge" id="hero-weather-badge" aria-label="Ikon cuaca">
           <span id="hero-weather-icon">☀️</span>
+            ditampilkan dalam tabel yang rapi dan mudah dibaca.
+          </p>
+        </div>
+        <div class="weather-badge" aria-label="Ikon cuaca">
+          <span>☀️</span>
         </div>
       </section>
 
@@ -73,6 +78,11 @@
           <span><strong>⛅ Nyaman</strong> 24–29°C</span>
           <span><strong>☀️ Panas</strong> 29–33°C</span>
           <span><strong>🔥 Sangat panas</strong> &gt; 33°C</span>
+            <h2 id="table-title">Daftar Waktu & Suhu</h2>
+          </div>
+          <button class="refresh-button" id="refresh-button" type="button">
+            Muat ulang
+          </button>
         </div>
 
         <div class="status-message" id="status-message" role="status">
@@ -87,6 +97,8 @@
                 <th scope="col">time (waktu pengukuran)</th>
                 <th scope="col">temperature_2m (°C)</th>
                 <th scope="col">Keterangan</th>
+                <th scope="col">time (waktu pengukuran)</th>
+                <th scope="col">temperature_2m (°C)</th>
               </tr>
             </thead>
             <tbody id="forecast-table-body"></tbody>

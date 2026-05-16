@@ -13,6 +13,8 @@ const heroWeatherIcon = document.querySelector("#hero-weather-icon");
 
 let forecastRows = [];
 let currentUnit = "°C";
+const rowCount = document.querySelector("#row-count");
+const temperatureUnit = document.querySelector("#temperature-unit");
 
 function setStatus(message, type = "info") {
   statusMessage.textContent = message;
@@ -108,6 +110,15 @@ function renderForecast() {
       const visual = getTemperatureVisual(row.temperature);
       const displayTemperature = Number.isFinite(row.temperature)
         ? `${row.temperature.toFixed(1)} ${currentUnit}`
+function renderForecast(hourly, unit) {
+  const times = hourly.time ?? [];
+  const temperatures = hourly.temperature_2m ?? [];
+
+  tableBody.innerHTML = times
+    .map((time, index) => {
+      const temperature = temperatures[index];
+      const displayTemperature = Number.isFinite(temperature)
+        ? `${temperature.toFixed(1)} ${unit}`
         : "-";
 
       return `
@@ -121,6 +132,8 @@ function renderForecast() {
             <strong>${visual.label}</strong>
             <span>${visual.description}</span>
           </td>
+          <td>${formatForecastTime(time)}</td>
+          <td>${displayTemperature}</td>
         </tr>
       `;
     })
@@ -139,6 +152,7 @@ function normalizeForecastRows(hourly) {
     time,
     temperature: temperatures[index],
   }));
+  rowCount.textContent = `${times.length} baris`;
 }
 
 async function loadForecast() {
@@ -146,6 +160,7 @@ async function loadForecast() {
   hourFilter.disabled = true;
   rowCount.textContent = "Memuat...";
   dominantCondition.textContent = "Memuat...";
+  rowCount.textContent = "Memuat...";
   setStatus("Mengambil data prakiraan cuaca...");
 
   try {
@@ -168,6 +183,14 @@ async function loadForecast() {
     rowCount.textContent = "Gagal dimuat";
     dominantCondition.textContent = "Tidak tersedia";
     updateHeroVisual([]);
+    const unit = data.hourly_units?.temperature_2m ?? "°C";
+
+    temperatureUnit.textContent = unit;
+    renderForecast(data.hourly ?? {}, unit);
+    hideStatus();
+  } catch (error) {
+    tableBody.innerHTML = "";
+    rowCount.textContent = "Gagal dimuat";
     setStatus(
       `Data cuaca gagal dimuat. Periksa koneksi internet lalu coba lagi. (${error.message})`,
       "error",
