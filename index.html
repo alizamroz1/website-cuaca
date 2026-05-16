@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prakiraan Cuaca Jakarta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero-card" aria-labelledby="page-title">
+        <div class="hero-content">
+          <p class="eyebrow">Open-Meteo Forecast</p>
+          <h1 id="page-title">Prakiraan Suhu Per Jam Jakarta</h1>
+          <p class="subtitle">
+            Data temperatur 2 meter dari koordinat Jakarta (-6.2, 106.8),
+            ditampilkan dalam tabel yang rapi dan mudah dibaca.
+          </p>
+        </div>
+        <div class="weather-badge" aria-label="Ikon cuaca">
+          <span>☀️</span>
+        </div>
+      </section>
+
+      <section class="summary-grid" aria-label="Ringkasan cuaca">
+        <article class="summary-card">
+          <span class="summary-label">Lokasi</span>
+          <strong>Jakarta</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Satuan</span>
+          <strong id="temperature-unit">°C</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Data Ditampilkan</span>
+          <strong id="row-count">Memuat...</strong>
+        </article>
+      </section>
+
+      <section class="forecast-card" aria-labelledby="table-title">
+        <div class="table-header">
+          <div>
+            <p class="eyebrow">Hourly forecast</p>
+            <h2 id="table-title">Daftar Waktu & Suhu</h2>
+          </div>
+          <button class="refresh-button" id="refresh-button" type="button">
+            Muat ulang
+          </button>
+        </div>
+
+        <div class="status-message" id="status-message" role="status">
+          Mengambil data prakiraan cuaca...
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">time (waktu pengukuran)</th>
+                <th scope="col">temperature_2m (°C)</th>
+              </tr>
+            </thead>
+            <tbody id="forecast-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
